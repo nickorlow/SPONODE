@@ -7,7 +7,7 @@ var exec = require('exec');
 var google = require('google');
 var weather = require('weather-js');
 var glob = require('glob');
-var Twitter = require('twitter');
+var Twitter = null;require('twitter');
 var querystring = require('querystring');
 var urban = require('urban');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
@@ -18,12 +18,6 @@ var sys = require('sys')
 var exec = require('child_process').exec;
 var rtoken = "";
 var allowExplicit = false;
-var client = new Twitter({
-	consumer_key: '',
-	consumer_secret: '',
-	access_token_key: '-',
-	access_token_secret: ''
-});
 
 var saAccount = {
 	username: " ",
@@ -67,20 +61,7 @@ var LAST_SEEN_ID = 0;
 var ENABLE_OTHER_SERVICES = false;
 var sending = false;
 
-// stream status updates if they mention our user
-// update with @username
-client.stream('statuses/filter', {track: '@typicalyospos'},  function(stream){
-	stream.on('data', function(tweet) {
-		// insert the chat that you want to send messages to here
-		var chatter = main_chat_title;
-		console.log(chatter, "@" + tweet.user.screen_name + " tweeted at us: " + tweet.text);
-		sendMessage(chatter, "@" + tweet.user.screen_name + " tweeted at us: " + tweet.text, true);
-	});
 
-	stream.on('error', function(error) {
-		console.log(error);
-	});
-});
 
 // login to SA
 if (saAccount.username !== "" && saAccount.password !== "") {
