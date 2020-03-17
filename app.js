@@ -16,8 +16,8 @@ var request = request.defaults({jar: true});
 var imessagemodule = require('iMessageModule');
 var sys = require('sys')
 var exec = require('child_process').exec;
-
-
+var rtoken = "";
+var allowExplicit = false;
 var client = new Twitter({
 	consumer_key: '',
 	consumer_secret: '',
@@ -556,8 +556,6 @@ function checkMessageText(messageId) {
 					return;
 				}
 
-				console.log("Message Detected");
-
 				var chatter;
 				var isGroupChat = false;
 				if (row.chat_identifier === null) {
@@ -575,18 +573,31 @@ function checkMessageText(messageId) {
 						}
 					}
 				}
+
+				getSpotifyUserKey(row, function(row, token){
+					console.log("Incoming Message Text: "+row.text);
+					if(row.text.substring(0,31) == "https://open.spotify.com/track/")
+					{
+						getSpotifySongInf(row.text, token, function(songinf){
+							console.log(songinf.name);
+
+							if(songinf.explicit && !allowExplicit)
+							{
+								sendiMessageNew(chatter, "Didn't Add Song: "+songinf.name+" By: "+songinf.artists[0].name+" REASON: Song is Explicit")
+							}
+							else
+							{
+								sendiMessageNew(chatter, "Added Song: "+songinf.name+" By: "+songinf.artists[0].name);
+								addTrackToQueue(row.text, chatter, token);
+							}
+						});
+					}
+					else 
+						console.log("Not a Spotify Link");
+
+					console.log();
+				});
 				
-				console.log("incoming message text: "+row.text);
-				if(row.text.substring(0,31) == "https://open.spotify.com/track/")
-				{
-					sendiMessageNew(chatter, "Spotify Link Detected");
-					addTrackToQueue(row.text, chatter);
-				}
-				else 
-					console.log("Not a Spotify Link");
-
-				console.log();
-
 				var rowText = row.text;
 				// rowText = rowText.toLowerCase();
 				if (rowText.split(' ').length < 2 && rowText.indexOf('.') === 0) {
@@ -607,13 +618,12 @@ function sendiMessageNew(to, msg)
 	exec("osascript sendMessage.applescript "+to+" \"SPONODE "+msg+"\"", function(err, stdout, stderr) {});
 }
 
-function addTrackToQueue(url, chatter)
+function addTrackToQueue(url, chatter, token)
 {
 	var xhr = new XMLHttpRequest();
     xhr.open('POST', "https://api.spotify.com/v1/playlists/62GgGB7DJWUHyDc6G6ar5k/tracks?uris=spotify:track:"+url.substring(31, url.indexOf("?")), true);
 	xhr.responseType = 'json';
-	xhr.setRequestHeader("Authorization", "Bearer BQB7n_VrqNLlmdjjNaWF2LVH10Ro__FQkVRH8qSTsO4x7D2ZsUtVFszIl2_ZJWv5IS5CD2jiO2rzaxoGH7JtzeIUyLl9d1ColW7VTLbNLgLZE7wdm-Aa14zQBWwaM3LErqCwvAuvKwr69qHF8LwbxPBSCTp7ukMXLbqR6LGj9N6Mkn272g66zD0wGspTa1OKpyE");
-	console.log("En Route to Mars~~~  "+ "https://api.spotify.com/v1/playlists/62GgGB7DJWUHyDc6G6ar5k/tracks?uris=spotify:track:"+url.substring(31, url.indexOf("?")));
+	xhr.setRequestHeader("Authorization", "Bearer "+token);
     xhr.onload = function() {
       var status = xhr.status;
       if (status === 201) {
@@ -624,18 +634,53 @@ function addTrackToQueue(url, chatter)
       }
     };
 	xhr.send();
-	
+}
+
+function getSpotifyUserKey(row, callback)
+{
+	var xhr = new XMLHttpRequest();
+    xhr.open('POST', "https://accounts.spotify.com/api/token", true);
+	xhr.responseType = 'json';
+	var params = "grant_type=refresh_token&refresh_token="+encodeURIComponent(rtoken);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.setRequestHeader("Authorization", "Basic NDEyNWExMTBiYzcxNDAwOWEyNjExMzQzODVmY2Y4ZDE6OTE2OGI2MzAzNzg1NDcyZTgwMDgzNzJkN2EzMWQwOGI=");
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 201 || status === 200) {
+        callback(row, JSON.parse(xhr.responseText).access_token);
+      } else {
+		callback(row, "error genning my key :(");
+      }
+    };
+    xhr.send(params);
+}
+
+function getSpotifySongInf(url, token, callback)
+{
+	var xhr = new XMLHttpRequest();
+    xhr.open('GET', "https://api.spotify.com/v1/tracks/"+url.substring(31, url.indexOf("?")), true);
+	xhr.responseType = 'json';
+	xhr.setRequestHeader("Authorization", "Bearer "+token);
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 201 || status === 200) {
+        callback( JSON.parse(xhr.responseText));
+      } else {
+		callback( "error getting song :(");
+      }
+    };
+    xhr.send();
 }
 
 function getSpotifyAPIKey(url)
 {
 	var xhr = new XMLHttpRequest();
     xhr.open('POST', "https://accounts.spotify.com/api/token", true);
-	xhr.responseType = 'json';
 	xhr.setRequestHeader("grant_type", "client_credentials");
     xhr.onload = function() {
       var status = xhr.status;
       if (status === 201) {
+
         callback(null, xhr.response);
       } else {
         callback(status, xhr.response);
