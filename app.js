@@ -555,28 +555,42 @@ function checkMessageText(messageId) {
 					}
 				}
 
+				if(row.text == "explon")
+				{
+					allowExplicit = !allowExplicit;
+					console.log(chatter+" has set allowExplicit to: "+allowExplicit);
+					console.log();
+					sendiMessageNew(chatter, "AllowExplicit has been set to: "+allowExplicit);
+					return;
+				}
+
 				getSpotifyUserKey(row, function(row, token){
 					console.log("Incoming Message Text: "+row.text);
 					if(row.text.substring(0,31) == "https://open.spotify.com/track/")
 					{
 						getSpotifySongInf(row.text, token, function(songinf){
-							console.log(songinf.name);
-
+							
 							if(songinf.explicit && !allowExplicit)
 							{
+								console.log("Not Adding(Explicit): "+songinf.name +" By: "+songinf.artists[0].name);
+								console.log();
 								sendiMessageNew(chatter, "Didn't Add Song: "+songinf.name+" By: "+songinf.artists[0].name+" REASON: Song is Explicit")
 							}
 							else
 							{
+								console.log("Adding: "+songinf.name +" By:"+songinf.artists[0].name);
 								sendiMessageNew(chatter, "Added Song: "+songinf.name+" By: "+songinf.artists[0].name);
 								addTrackToQueue(row.text, chatter, token);
 							}
 						});
 					}
 					else 
+					{
 						console.log("Not a Spotify Link");
+						console.log();
+					}
 
-					console.log();
+				
 				});
 				
 				var rowText = row.text;
@@ -608,9 +622,11 @@ function addTrackToQueue(url, chatter, token)
     xhr.onload = function() {
       var status = xhr.status;
       if (status === 201) {
-       console.log("Song Added to Playlist");
+	   console.log("Song Added to Playlist");
+	   console.log();
       } else {
 		console.log("Error Adding Song to Playlist    Error Info:"+status+" <> " + xhr.response);
+		console.log();
 		sendiMessageNew("Error Adding Song :( Debuginf: "+status+" <> " + xhr.response, chatter);
       }
     };
