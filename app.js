@@ -16,7 +16,7 @@ var request = request.defaults({jar: true});
 var imessagemodule = require('iMessageModule');
 var sys = require('sys')
 var exec = require('child_process').exec;
-var rtoken = "";
+var rtoken = "AQBpC7A2_4zyb-bm2VoxVRcvqrdhq_AvFYw8dj-l0MkFDGZreIvLV-QqBlvm4BSiyTOGiIfWg2EM2YOmhhSFbpiDkfPUzsODePA06iwZ3WDXxvXkYfb4xdovUv9tlkn3eFc";
 var allowExplicit = false;
 
 var saAccount = {
@@ -555,7 +555,7 @@ function checkMessageText(messageId) {
 					}
 				}
 
-				if(row.text == "explon")
+				if(row.text == "overrideexpl")
 				{
 					allowExplicit = !allowExplicit;
 					console.log(chatter+" has set allowExplicit to: "+allowExplicit);
