@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPONODE", "SPONODE\SPONODE.csproj", "{761EC67B-4B4F-40F4-8C87-4D875C5A7B40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyAPI", "SpotifyAPI\SpotifyAPI.csproj", "{3A30BC71-E902-41B1-B4D2-AB386337E2AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{761EC67B-4B4F-40F4-8C87-4D875C5A7B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{761EC67B-4B4F-40F4-8C87-4D875C5A7B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{761EC67B-4B4F-40F4-8C87-4D875C5A7B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{761EC67B-4B4F-40F4-8C87-4D875C5A7B40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A30BC71-E902-41B1-B4D2-AB386337E2AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A30BC71-E902-41B1-B4D2-AB386337E2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A30BC71-E902-41B1-B4D2-AB386337E2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A30BC71-E902-41B1-B4D2-AB386337E2AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

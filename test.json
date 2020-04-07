@@ -1,0 +1,49 @@
+{
+  "Categories": 
+  [
+      [
+        {
+          "ItemID": "00001",
+          "ItemName": "NatureValley Crunch Bar",
+          "ImageURL": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT7ZD2vSN69OCIdFywgwurukUG6hWpCtQDO3-ed7OI8w8v7kXq5e2yYTD51ia6WTXzvT7IOhjE&usqp=CAc",
+          "Price": "5.00",
+          "SellAge": 0
+        },
+        {
+          "ItemID": "00002",
+          "ItemName": "Doritos",
+          "ImageURL": "",
+          "Price": "2.50",
+          "SellAge": 0
+        }
+      ],
+      [
+        {
+          "ItemID": "00003",
+          "ItemName": "Aquafina Water",
+          "ImageURL": "https://www.kroger.com/product/images/xlarge/front/0001200000159",
+          "Price": "1.00",
+          "SellAge": 0
+        },
+        {
+          "ItemID": "00004",
+          "ItemName": "Gatorade",
+          "ImageURL": "https://cdn.mscdirect.com/global/images/ProductImages/9849981-21.jpg",
+          "Price": "1.00",
+          "SellAge": 0
+        }
+      ],
+      [
+        "Name":"Miscellanious",
+        "Products":[
+        {
+          "ItemID": "00005",
+          "ItemName": "Cigarettes",
+          "ImageURL": "https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwj1poP1tfzmAhUB2FkKHW6fA-QQjRx6BAgBEAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCigarette&psig=AOvVaw2balGw1EUw_5-5P6ByHxyS&ust=1578862129025644",
+          "Price": "1.00",
+          "SellAge": 21
+        }
+    ]
+      ]
+    ]
+}

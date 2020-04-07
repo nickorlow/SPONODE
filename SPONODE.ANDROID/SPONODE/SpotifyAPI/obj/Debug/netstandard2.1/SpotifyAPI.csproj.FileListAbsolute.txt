@@ -1,0 +1,9 @@
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/bin/Debug/netstandard2.1/SpotifyAPI.deps.json
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/bin/Debug/netstandard2.1/SpotifyAPI.dll
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/bin/Debug/netstandard2.1/SpotifyAPI.pdb
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/obj/Debug/netstandard2.1/SpotifyAPI.csprojAssemblyReference.cache
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/obj/Debug/netstandard2.1/SpotifyAPI.csproj.CoreCompileInputs.cache
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/obj/Debug/netstandard2.1/SpotifyAPI.AssemblyInfoInputs.cache
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/obj/Debug/netstandard2.1/SpotifyAPI.AssemblyInfo.cs
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/obj/Debug/netstandard2.1/SpotifyAPI.dll
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/obj/Debug/netstandard2.1/SpotifyAPI.pdb

@@ -1,0 +1,51 @@
+﻿<Properties StartupConfiguration="{761EC67B-4B4F-40F4-8C87-4D875C5A7B40}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SPONODE/Properties/AndroidManifest.xml">
+    <Files>
+      <File FileName="SPONODE/NLService.cs" Line="46" Column="1" />
+      <File FileName="../../../../../../Library/Frameworks/Mono.framework/External/xbuild/Xamarin/Android/Xamarin.Android.Common.targets" Line="1697" Column="2" />
+      <File FileName="SpotifyAPI/APIKey.cs" Line="31" Column="93" NotebookId="1" IsPinned="True" />
+      <File FileName="SPONODE/Song.cs" Line="15" Column="54" NotebookId="1" />
+      <File FileName="SPONODE/MainActivity.cs" Line="26" Column="26" NotebookId="1" />
+      <File FileName="SpotifyAPI/Playlist.cs" Line="45" Column="82" NotebookId="1" />
+      <File FileName="SPONODE/Properties/AndroidManifest.xml" NotebookId="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SPONODE" expanded="True">
+            <Node name="SPONODE" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="Properties" expanded="True">
+                <Node name="AndroidManifest.xml" selected="True" />
+              </Node>
+              <Node name="Resources" expanded="True">
+                <Node name="layout" expanded="True" />
+                <Node name="menu" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="SpotifyAPI" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>reader[0]</Value>
+          <Value>reader[1]</Value>
+          <Value>Environment.GetEnvironmentVariable("DwollaURI") + "token"</Value>
+          <Value>Environment.GetEnvironmentVariable("DwollaKeyDev")</Value>
+          <Value>e</Value>
+          <Value>a[0]</Value>
+          <Value>aisleInfo[0]</Value>
+          <Value>artists[i]["name"].ToString()</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.SPONODE AndroidDesignerPreferredTheme="AppTheme" AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.POWER201903054599" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
