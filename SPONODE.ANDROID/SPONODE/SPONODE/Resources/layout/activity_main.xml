@@ -79,6 +79,18 @@
 			android:layout_height="wrap_content"
             android:onClick="OpenSettings"
 			android:id="@+id/openSettingsBtn" />
+          <TextView
+			android:text="Re-Link Spotify"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView16e2" />
+        <Button
+			android:text="Link Spotify Account"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:onClick="LinkSpotify"
+			android:id="@+id/spotifyLinkBtn" />
 
 
 	</LinearLayout>

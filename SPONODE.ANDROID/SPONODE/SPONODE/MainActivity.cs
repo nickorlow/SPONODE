@@ -74,7 +74,7 @@ namespace SPONODE
             }
             catch (Exception e)
             {
-                string s = "";/*App wasn't opened from spotify*/
+                Console.WriteLine("ERROR~~~" + e.Message);
             }
 
             if (prefs.GetBoolean("firstLaunch", true))
@@ -88,12 +88,7 @@ namespace SPONODE
                 StartActivity(intent);
             }
 
-            if (prefs.GetString("userToken", null) == null)
-            {
-                var uri = Android.Net.Uri.Parse("https://accounts.spotify.com/authorize?client_id=f85e85b62774419db8bb22c0a2ca59c9&response_type=code&redirect_uri=sponode://getapikey&scope=playlist-read-collaborative playlist-modify-public playlist-read-private playlist-modify-private");
-                var intent = new Intent(Intent.ActionView, uri);
-                StartActivity(intent);
-            }
+
 
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -139,12 +134,20 @@ namespace SPONODE
             EditText urlInput = FindViewById<EditText>(Resource.Id.playlistURL);
             ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
             ISharedPreferencesEditor editor = prefs.Edit();
+            SetUI();
             editor.PutString("playlistID", urlInput.Text);
             editor.Apply();
             var toast = Toast.MakeText(this, "Playlist Set!", ToastLength.Short);
             toast.Show();
-
             urlInput.Text = "";
+        }
+
+        [Java.Interop.Export("LinkSpotify")]
+        public void LinkSpotify(View v)
+        {
+            var uri = Android.Net.Uri.Parse("https://accounts.spotify.com/authorize?client_id=f85e85b62774419db8bb22c0a2ca59c9&response_type=code&redirect_uri=sponode://getapikey&scope=playlist-read-collaborative playlist-modify-public playlist-read-private playlist-modify-private");
+            var intent = new Intent(Intent.ActionView, uri);
+            StartActivity(intent);
         }
 
         public NameValueCollection ParseQuery(string queryString)
