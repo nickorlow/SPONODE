@@ -47,9 +47,12 @@ namespace SpotifyAPI
                 ASCIIEncoding encoding = new ASCIIEncoding();
                 Byte[] bytes = encoding.GetBytes(load);
 
-                Stream newStream = http.GetRequestStream();
-                newStream.Write(bytes, 0, bytes.Length);
-                newStream.Close();
+
+                using (Stream newStream = http.GetRequestStream())
+                {
+                    newStream.Write(bytes, 0, bytes.Length);
+                    newStream.Close();
+                }
 
 
                 try

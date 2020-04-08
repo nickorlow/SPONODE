@@ -34,9 +34,11 @@ namespace SPONODE
         }
         public override void OnNotificationPosted(StatusBarNotification sbn)
         {
+
+
             string messageContents = sbn.Notification.Extras.GetCharSequence(Notification.ExtraText);
 
-            if (messageContents == null || messageContents.Substring(0, 4) != "http")
+            if (messageContents == null || messageContents.Substring(0, 31) != "https://open.spotify.com/track")
                 return;
 
             try
@@ -44,35 +46,41 @@ namespace SPONODE
                 ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
 
                 string apiKey = prefs.GetString("userToken", null);
-                base.OnNotificationPosted(sbn);
-                Console.WriteLine("Created Notif");
-                Log.Info("SPONODE", sbn.PackageName + " - " + messageContents);
-                Song s = new Song(messageContents, apiKey);
 
+                Console.WriteLine("Created Notif");
+                Log.Info("SPONODE", " - " + messageContents);
+                Song s = new Song(messageContents, apiKey);
+                CancelNotification(sbn.Key);
                 if (prefs.GetBoolean("allowExplicit", true) || !s.IsExplicit)
                 {
-                    Log.Info("SPONODE", "Adding " + s.SongName + "By: " + s.ArtistNames[0]);
+                    SendNotif("Added Song " + s.SongName + " by: " + s.ArtistNames[0]);
+                    Log.Info("SPONODE", "Adding " + s.SongName + " By: " + s.ArtistNames[0]);
                     new Playlist(prefs.GetString("playlistID", "62GgGB7DJWUHyDc6G6ar5k"), apiKey).AddSong(s);
                 }
                 else
                 {
+                    SendNotif("Didn't Add Explicit Song " + s.SongName + " by: " + s.ArtistNames[0]);
                     Log.Info("SPONODE", "Didnt Add Explicit Song");
                 }
-                //SendNotif("Added Song " + s.SongName + " by:" + s.ArtistNames[0]);
+
+
             }
             catch (Exception e)
             {
+                SendNotif("Error Occoured Adding Song");
                 Log.Error("SPONODE", e.Message);
             }
         }
 
         public void SendNotif(string notif)
         {
+            CreateNotificationChannel();
             // Instantiate the builder and set notification elements:
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SPONODESONGADD")
                 .SetContentTitle("SPONODE Song Added")
                 .SetContentText(notif)
-                 .SetSmallIcon(Resource.Drawable.ic_mtrl_chip_checked_circle);
+                .SetSmallIcon(Resource.Drawable.ic_mtrl_chip_checked_circle)
+                .SetPriority(NotificationCompat.PriorityMax);
 
             // Build the notification:
             Notification notification = builder.Build();

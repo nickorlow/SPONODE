@@ -50,9 +50,11 @@ namespace SPONODE
                 ASCIIEncoding encoding = new ASCIIEncoding();
                 Byte[] bytes = encoding.GetBytes(load);
 
-                Stream newStream = http.GetRequestStream();
-                newStream.Write(bytes, 0, bytes.Length);
-                newStream.Close();
+                using (Stream newStream = http.GetRequestStream())
+                {
+                    newStream.Write(bytes, 0, bytes.Length);
+                    newStream.Close();
+                }
 
 
                 try
@@ -111,7 +113,19 @@ namespace SPONODE
                 ISharedPreferencesEditor editor = prefs.Edit();
                 editor.PutBoolean("allowExplicit", explicitSwitch.Checked);
                 editor.Apply();
+                var toast = Toast.MakeText(this, "Changed Explicit Preferences", ToastLength.Short);
+                toast.Show();
+
             };
+        }
+
+        [Java.Interop.Export("OpenSettings")]
+        public void OpenSettings(View v)
+        {
+
+            //Show notif settings screen on app's first launch
+            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            StartActivity(intent);
         }
 
         [Java.Interop.Export("ChangePlaylist")]
@@ -124,6 +138,8 @@ namespace SPONODE
             editor.Apply();
             var toast = Toast.MakeText(this, "Playlist Set!", ToastLength.Short);
             toast.Show();
+
+            urlInput.Text = "";
         }
 
         public NameValueCollection ParseQuery(string queryString)

@@ -58,13 +58,33 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/explicitSwitch" />
-
+        <Space
+			android:layout_width="wrap_content"
+			android:layout_height="10dp"/>
+        <TextView
+			android:text="\nNot Working?"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView12" />
+         <TextView
+			android:text="Turn SPONODE on"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView162" />
+        <Button
+			android:text="Set Notification Settings"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:onClick="OpenSettings"
+			android:id="@+id/openSettingsBtn" />
 
 
 	</LinearLayout>
 
 	<TextView
-		android:text="Made By Nicholas Orlowsky in Austin, TX"
+		android:text="Made By Nicholas Orlowsky in Texas"
 		android:textAppearance="?android:attr/textAppearanceSmall"
 		android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

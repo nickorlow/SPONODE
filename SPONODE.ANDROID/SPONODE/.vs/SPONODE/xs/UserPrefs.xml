@@ -1,14 +1,15 @@
 ﻿<Properties StartupConfiguration="{761EC67B-4B4F-40F4-8C87-4D875C5A7B40}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SPONODE/Resources/layout/activity_main.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SPONODE/Properties/AndroidManifest.xml">
     <Files>
-      <File FileName="SpotifyAPI/APIKey.cs" Line="24" Column="22" IsPinned="True" />
-      <File FileName="SPONODE/Song.cs" Line="15" Column="54" />
-      <File FileName="SPONODE/MainActivity.cs" Line="102" Column="45" />
-      <File FileName="SpotifyAPI/Playlist.cs" Line="45" Column="82" />
+      <File FileName="SpotifyAPI/APIKey.cs" Line="67" Column="31" IsPinned="True" />
+      <File FileName="SPONODE/Song.cs" Line="42" Column="1" />
+      <File FileName="SPONODE/MainActivity.cs" Line="114" Column="79" />
+      <File FileName="SpotifyAPI/Playlist.cs" Line="26" Column="58" />
+      <File FileName="SPONODE/Resources/layout/content_main.xml" Line="56" Column="16" />
+      <File FileName="SPONODE/Resources/layout/activity_main.xml" Line="60" Column="35" />
+      <File FileName="SPONODE/NLService.cs" Line="54" Column="68" />
+      <File FileName="SPONODE/Resources/mipmap-xxxhdpi/ic_launcher.png" />
       <File FileName="SPONODE/Properties/AndroidManifest.xml" />
-      <File FileName="SPONODE/Resources/layout/content_main.xml" Line="1" Column="1" />
-      <File FileName="SPONODE/Resources/layout/activity_main.xml" Line="34" Column="44" />
-      <File FileName="SPONODE/NLService.cs" Line="50" Column="19" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,12 +17,16 @@
           <Node name="SPONODE" expanded="True">
             <Node name="SPONODE" expanded="True">
               <Node name="References" expanded="True" />
-              <Node name="Properties" expanded="True" />
+              <Node name="Properties" expanded="True">
+                <Node name="AndroidManifest.xml" selected="True" />
+              </Node>
               <Node name="Resources" expanded="True">
-                <Node name="layout" expanded="True">
-                  <Node name="activity_main.xml" selected="True" />
-                </Node>
-                <Node name="menu" expanded="True" />
+                <Node name="layout" expanded="True" />
+                <Node name="mipmap-hdpi" expanded="True" />
+                <Node name="mipmap-mdpi" expanded="True" />
+                <Node name="mipmap-xhdpi" expanded="True" />
+                <Node name="mipmap-xxhdpi" expanded="True" />
+                <Node name="mipmap-xxxhdpi" expanded="True" />
               </Node>
             </Node>
             <Node name="SpotifyAPI" expanded="True" />
@@ -35,9 +40,10 @@
           <Value>Environment.GetEnvironmentVariable("DwollaURI") + "token"</Value>
           <Value>prefs.GetBoolean("firstLaunch", true)</Value>
           <Value>e</Value>
-          <Value>a[0]</Value>
+          <Value>!s.IsExplicit &amp;&amp; !(prefs.GetBoolean("allowExplicit", true))</Value>
           <Value>aisleInfo[0]</Value>
           <Value>artists[i]["name"].ToString()</Value>
+          <Value>prefs.GetBoolean("playlistID",false)</Value>
         </State>
       </Pad>
     </Pads>
@@ -46,7 +52,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SpotifyAPI/APIKey.cs" relfile="SpotifyAPI/APIKey.cs" line="66" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
