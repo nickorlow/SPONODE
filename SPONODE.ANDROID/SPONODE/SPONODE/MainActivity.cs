@@ -105,6 +105,12 @@ namespace SPONODE
         {
             ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
 
+            if (prefs.GetString("playlistID", null) != null && prefs.GetString("userToken", null) != null)
+            {
+                TextView playlistName = FindViewById<TextView>(Resource.Id.currentPlaylistText);
+                playlistName.Text = "Current Playlist: " + new Playlist(prefs.GetString("playlistID", null), prefs.GetString("userToken", null)).PlaylistName;
+            }
+
             Switch explicitSwitch = FindViewById<Switch>(Resource.Id.explicitSwitch);
             explicitSwitch.Checked = prefs.GetBoolean("allowExplicit", true);
             explicitSwitch.CheckedChange += delegate (object sender, CompoundButton.CheckedChangeEventArgs e)
@@ -122,7 +128,6 @@ namespace SPONODE
         [Java.Interop.Export("OpenSettings")]
         public void OpenSettings(View v)
         {
-
             //Show notif settings screen on app's first launch
             Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
             StartActivity(intent);

@@ -9,6 +9,7 @@ namespace SpotifyAPI
     public class Playlist
     {
         public string PlaylistID { get; protected set; }
+        public string PlaylistName { get; protected set; }
         public string PlaylistURL
         {
             get
@@ -32,7 +33,21 @@ namespace SpotifyAPI
 
         private void SetInfo()
         {
-            //TODO: Get Stuff Here
+            string url = PlaylistURL;
+
+            var http = (HttpWebRequest)WebRequest.Create(new Uri(url));
+            http.Method = "GET";
+            http.Headers.Add("Authorization", "Bearer " + new APIKey(RefreshToken).Key);
+
+            try
+            {
+                string response = new StreamReader(http.GetResponse().GetResponseStream()).ReadToEnd();
+                PlaylistName = JObject.Parse(response)["name"].ToString();
+            }
+            catch (WebException e)
+            {
+                throw e;
+            }
         }
 
 
