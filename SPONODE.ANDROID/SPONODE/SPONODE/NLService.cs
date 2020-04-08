@@ -4,6 +4,7 @@ using Android.Content;
 using Android.OS;
 using Android.Preferences;
 using Android.Service.Notification;
+using Android.Support.V4.App;
 using Android.Util;
 using SpotifyAPI;
 
@@ -33,6 +34,11 @@ namespace SPONODE
         }
         public override void OnNotificationPosted(StatusBarNotification sbn)
         {
+            string messageContents = sbn.Notification.Extras.GetCharSequence(Notification.ExtraText);
+
+            if (messageContents == null || messageContents.Substring(0, 4) != "http")
+                return;
+
             try
             {
                 ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
@@ -40,33 +46,65 @@ namespace SPONODE
                 string apiKey = prefs.GetString("userToken", null);
                 base.OnNotificationPosted(sbn);
                 Console.WriteLine("Created Notif");
-                string messageContents = sbn.Notification.Extras.GetCharSequence(Notification.ExtraText);
                 Log.Info("SPONODE", sbn.PackageName + " - " + messageContents);
                 Song s = new Song(messageContents, apiKey);
 
-                Log.Info("SPONODE", "Adding " + s.SongName + "By: " + s.ArtistNames[0]);
-                new Playlist(prefs.GetString("playlistID", "62GgGB7DJWUHyDc6G6ar5k"), apiKey).AddSong(s);
+                if (prefs.GetBoolean("allowExplicit", true) || !s.IsExplicit)
+                {
+                    Log.Info("SPONODE", "Adding " + s.SongName + "By: " + s.ArtistNames[0]);
+                    new Playlist(prefs.GetString("playlistID", "62GgGB7DJWUHyDc6G6ar5k"), apiKey).AddSong(s);
+                }
+                else
+                {
+                    Log.Info("SPONODE", "Didnt Add Explicit Song");
+                }
+                //SendNotif("Added Song " + s.SongName + " by:" + s.ArtistNames[0]);
             }
             catch (Exception e)
             {
                 Log.Error("SPONODE", e.Message);
             }
         }
-        /*	var xhr = new XMLHttpRequest();
-    xhr.open('POST', "https://api.spotify.com/v1/playlists/62GgGB7DJWUHyDc6G6ar5k/tracks?uris=spotify:track:"+url.substring(31, url.indexOf("?")), true);
-	xhr.responseType = 'json';
-	xhr.setRequestHeader("Authorization", "Bearer "+token);
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 201) {
-	   console.log("Song Added to Playlist");
-	   console.log();
-      } else {
-		console.log("Error Adding Song to Playlist    Error Info:"+status+" <> " + xhr.response);
-		console.log();
-		sendiMessageNew("Error Adding Song :( Debuginf: "+status+" <> " + xhr.response, chatter);
-      }
-    };*/
+
+        public void SendNotif(string notif)
+        {
+            // Instantiate the builder and set notification elements:
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "SPONODESONGADD")
+                .SetContentTitle("SPONODE Song Added")
+                .SetContentText(notif)
+                 .SetSmallIcon(Resource.Drawable.ic_mtrl_chip_checked_circle);
+
+            // Build the notification:
+            Notification notification = builder.Build();
+
+            // Get the notification manager:
+            NotificationManager notificationManager =
+                GetSystemService(Context.NotificationService) as NotificationManager;
+
+            // Publish the notification:
+            const int notificationId = 0;
+            notificationManager.Notify(notificationId, notification);
+        }
+
+        void CreateNotificationChannel()
+        {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.O)
+            {
+                // Notification channels are new in API 26 (and not a part of the
+                // support library). There is no need to create a notification
+                // channel on older versions of Android.
+                return;
+            }
+
+            var channel = new NotificationChannel("SPONODESONGADD", "Song Added", NotificationImportance.Default)
+            {
+                Description = "Notify you when someone adds a song via SPONODE"
+            };
+
+            var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+            notificationManager.CreateNotificationChannel(channel);
+        }
+
         public override void OnNotificationRemoved(StatusBarNotification sbn)
         {
             base.OnNotificationRemoved(sbn);

@@ -1,8 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent">
-    <android.support.design.widget.AppBarLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:theme="@style/AppTheme.AppBarOverlay">
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" android:background="?attr/colorPrimary" app:popupTheme="@style/AppTheme.PopupOverlay" />
-    </android.support.design.widget.AppBarLayout>
-    <include layout="@layout/content_main" />
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin" app:srcCompat="@android:drawable/ic_dialog_email" />
-</android.support.design.widget.CoordinatorLayout>
+<RelativeLayout
+	xmlns:android = "http://schemas.android.com/apk/res/android"
+	android:layout_width = "match_parent"
+	android:layout_height = "match_parent">
+	<LinearLayout
+		 android:orientation = "vertical"
+         android:layout_alignParentTop="true"
+         android:layout_width = "match_parent"
+         android:layout_height = "wrap_content"
+		android:id="@+id/linearLayout1">
+		<TextView
+			android:text="Settings"
+			android:textSize="54dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView2" />
+        <TextView
+		android:text="SPONODE ANDROID"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="5dp"
+		android:id="@+id/aboutView" />
+		<Space
+			android:layout_width="wrap_content"
+			android:layout_height="30dp"/>
+        <TextView
+			android:text="Current Playlist: None"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/currentPlaylistText" />
+		<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/playlistURL"
+			android:hint="Playlist URL" />
+
+		<Button
+			android:text="Set Playlist"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:onClick="ChangePlaylist"
+			android:id="@+id/setPlaylistButton" />
+		<Space
+			android:layout_width="wrap_content"
+			android:layout_height="10dp"/>
+
+		<TextView
+			android:text="\nAllow Explicit Songs"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView1" />
+		<Switch
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/explicitSwitch" />
+
+
+
+	</LinearLayout>
+
+	<TextView
+		android:text="Made By Nicholas Orlowsky in Austin, TX"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="5dp"
+        android:gravity="center"
+		android:id="@+id/aboutView" />
+</RelativeLayout>

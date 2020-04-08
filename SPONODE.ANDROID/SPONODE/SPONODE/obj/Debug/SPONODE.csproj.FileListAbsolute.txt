@@ -283,3 +283,5 @@
 /Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SPONODE/obj/Debug/android/assets/System.Web.Services.pdb
 /Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SPONODE/obj/Debug/android/assets/System.Xml.Linq.dll
 /Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SPONODE/obj/Debug/android/assets/System.Xml.Linq.pdb
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SPONODE/obj/Debug/android/assets/Mono.Android.Export.dll
+/Users/nickorlow/test/imessagebot/SPONODE.ANDROID/SPONODE/SPONODE/obj/Debug/android/assets/Mono.Android.Export.pdb

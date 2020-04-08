@@ -78,7 +78,7 @@ namespace SPONODE
             if (prefs.GetBoolean("firstLaunch", true))
             {
                 ISharedPreferencesEditor editor = prefs.Edit();
-                editor.PutBoolean("firstLanch", false);
+                editor.PutBoolean("firstLaunch", false);
                 editor.Apply();
 
                 //Show notif settings screen on app's first launch
@@ -96,12 +96,34 @@ namespace SPONODE
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
+            SetUI();
+        }
 
-            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
+        public void SetUI()
+        {
+            ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
 
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
+            Switch explicitSwitch = FindViewById<Switch>(Resource.Id.explicitSwitch);
+            explicitSwitch.Checked = prefs.GetBoolean("allowExplicit", true);
+            explicitSwitch.CheckedChange += delegate (object sender, CompoundButton.CheckedChangeEventArgs e)
+            {
+                ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
+                ISharedPreferencesEditor editor = prefs.Edit();
+                editor.PutBoolean("allowExplicit", explicitSwitch.Checked);
+                editor.Apply();
+            };
+        }
+
+        [Java.Interop.Export("ChangePlaylist")]
+        public void ChangePlaylist(View v)
+        {
+            EditText urlInput = FindViewById<EditText>(Resource.Id.playlistURL);
+            ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
+            ISharedPreferencesEditor editor = prefs.Edit();
+            editor.PutString("playlistID", urlInput.Text);
+            editor.Apply();
+            var toast = Toast.MakeText(this, "Playlist Set!", ToastLength.Short);
+            toast.Show();
         }
 
         public NameValueCollection ParseQuery(string queryString)

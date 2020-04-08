@@ -20,9 +20,10 @@ namespace SpotifyAPI
 
         public Playlist(string playlistLocator, string refreshToken)
         {
+            //https://open.spotify.com/playlist/5PUqB7n9e6Ebn5JZXfjEaU?si=BJ8yfDz9QJS3S_3WFP2K4w
             RefreshToken = refreshToken;
             if (playlistLocator.Substring(0, 4) == "http")
-                PlaylistID = playlistLocator.Substring(31, (playlistLocator.IndexOf('?') - 31));
+                PlaylistID = playlistLocator.Substring(34, (playlistLocator.IndexOf('?') - 34));
             else
                 PlaylistID = playlistLocator;
 
