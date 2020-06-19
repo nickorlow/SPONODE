@@ -18,7 +18,7 @@
     "querystring": "^0.2.0",
     "request": "^2.54.0",
     "sqlite3": "^4.0.4",
-    "tough-cookie": "^0.12.1",
+    "tough-cookie": "^2.3.3",
     "twitter": "^1.2.4",
     "urban": "^0.2.3",
     "weather": "^0.1.0",
