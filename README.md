@@ -7,6 +7,9 @@ Want to play music in a public venue easily?
 
 This allows anyone to imessage you a link to a spotify song, and it will be automatically added to your queue!
 
+## The Catch
+Spotify's API (at least when I wrote this) didn't allow queue management so this adds to playlists and you should just have that playlist playing.
+
 ## What's Supported?
 MacOS and Android
 - Tested on Android 9
